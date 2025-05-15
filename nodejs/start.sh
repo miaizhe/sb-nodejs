@@ -44,7 +44,7 @@ echo "ArgoSB脚本未启动，可能与其他sing-box或者argo脚本冲突了�
 exit
 fi
 if [ ! -e nixag/sing-box ]; then
-curl -L -o nixag/sing-box  -# --retry 2 https://github.com/yonggekkk/vless-nodejs/releases/download/vlnodejs/sing-box-amd64
+curl -L -o nixag/sing-box  -# --retry 2 https://github.com/yonggekkk/vless-nodejs/releases/download/vlnodejs/sing-box
 chmod +x nixag/sing-box
 fi
 if [ -z $port_vm_ws ]; then
