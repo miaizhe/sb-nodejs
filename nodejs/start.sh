@@ -44,18 +44,8 @@ echo "ArgoSB脚本未启动，可能与其他sing-box或者argo脚本冲突了�
 exit
 fi
 if [ ! -e nixag/sing-box ]; then
-sbcore=$(curl -Ls https://data.jsdelivr.com/v1/package/gh/SagerNet/sing-box | grep -Eo '"[0-9.]+",' | sed -n 1p | tr -d '",')
-sbname="sing-box-$sbcore-linux-$cpu"
-echo "下载sing-box最新正式版内核：$sbcore"
-curl -L -o nixag/sing-box.tar.gz  -# --retry 2 https://github.com/SagerNet/sing-box/releases/download/v$sbcore/$sbname.tar.gz
-if [[ -f 'nixag/sing-box.tar.gz' ]]; then
-tar xzf nixag/sing-box.tar.gz -C nixag
-mv nixag/$sbname/sing-box nixag
-rm -rf nixag/{sing-box.tar.gz,$sbname}
+curl -L -o nixag/sing-box  -# --retry 2 https://github.com/yonggekkk/vless-nodejs/releases/download/vlnodejs/sing-box-amd64
 chmod +x nixag/sing-box
-else
-echo "下载失败，请检测网络" && exit
-fi
 fi
 if [ -z $port_vm_ws ]; then
 port_vm_ws=$(shuf -i 10000-65535 -n 1)
