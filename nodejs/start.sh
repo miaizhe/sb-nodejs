@@ -241,31 +241,6 @@ fi
 fi
 
 if find /proc/*/exe -type l 2>/dev/null | grep -E '/proc/[0-9]+/exe' | xargs -r readlink 2>/dev/null | grep -q 'agsb/s' || pgrep -f 'agsb/s' >/dev/null 2>&1 ; then
-[ -f ~/.bashrc ] || touch ~/.bashrc
-sed -i '/yonggekkk/d' ~/.bashrc
-echo "if ! find /proc/*/exe -type l 2>/dev/null | grep -E '/proc/[0-9]+/exe' | xargs -r readlink 2>/dev/null | grep -q 'agsb/s' && ! pgrep -f 'agsb/s' >/dev/null 2>&1; then export ip=\"${ipsw}\" argo=\"${argo}\" uuid=\"${uuid}\" $vlp=\"${port_vl_re}\" $vmp=\"${port_vm_ws}\" $hyp=\"${port_hy2}\" $tup=\"${port_tu}\" reym=\"${ym_vl_re}\" agn=\"${ARGO_DOMAIN}\" agk=\"${ARGO_AUTH}\"; bash <(curl -Ls https://raw.githubusercontent.com/yonggekkk/argosb/beta/1.sh); fi" >> ~/.bashrc
-COMMAND="agsb"
-SCRIPT_PATH="$HOME/bin/$COMMAND"
-mkdir -p "$HOME/bin"
-curl -Ls https://raw.githubusercontent.com/yonggekkk/argosb/beta/1.sh > "$SCRIPT_PATH"
-chmod +x "$SCRIPT_PATH"
-sed -i '/export PATH="\$HOME\/bin:\$PATH"/d' ~/.bashrc
-echo 'export PATH="$HOME/bin:$PATH"' >> "$HOME/.bashrc"
-grep -qxF 'source ~/.bashrc' ~/.bash_profile 2>/dev/null || echo 'source ~/.bashrc' >> ~/.bash_profile
-source ~/.bashrc
-crontab -l > /tmp/crontab.tmp 2>/dev/null
-sed -i '/agsb\/sing-box/d' /tmp/crontab.tmp
-echo '@reboot /bin/bash -c "nohup $HOME/agsb/sing-box run -c $HOME/agsb/sb.json >/dev/null 2>&1 &"' >> /tmp/crontab.tmp
-sed -i '/agsb\/cloudflared/d' /tmp/crontab.tmp
-if [[ -n $argo ]]; then
-if [[ -n "${ARGO_DOMAIN}" && -n "${ARGO_AUTH}" ]]; then
-echo '@reboot /bin/bash -c "nohup $HOME/agsb/cloudflared tunnel --no-autoupdate --edge-ip-version auto --protocol http2 run --token $(cat $HOME/agsb/sbargotoken.log 2>/dev/null) >/dev/null 2>&1 &"' >> /tmp/crontab.tmp
-else
-echo '@reboot /bin/bash -c "nohup $HOME/agsb/cloudflared tunnel --url http://localhost:$(grep -A2 vmess-sb $HOME/agsb/sb.json | tail -1 | tr -cd 0-9) --edge-ip-version auto --no-autoupdate --protocol http2 > $HOME/agsb/argo.log 2>&1 &"' >> /tmp/crontab.tmp
-fi
-fi
-crontab /tmp/crontab.tmp 2>/dev/null
-rm /tmp/crontab.tmp
 echo "ArgoSB脚本进程启动成功，安装完毕" && sleep 2
 else
 echo "ArgoSB脚本进程未启动，安装失败" && exit
