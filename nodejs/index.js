@@ -1,7 +1,7 @@
 const http = require('http');
 const fs = require('fs');
 const exec = require("child_process").exec;
-const subtxt = './nixag/list.txt' 
+const subtxt = `${process.env.HOME}/agsb/jh.txt`
 const PORT = process.env.PORT || 9527; 
 
 // Run start.sh
