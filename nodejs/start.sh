@@ -1,6 +1,6 @@
 #!/bin/bash
 export LANG=en_US.UTF-8
-export uuid=${uuid:-''} #填写uuid，空为随机
+export uuid=${uuid:-'107845f2-457d-4236-92a1-fc8027c13ded'} #填写uuid，空为随机
 export port_vl_re=${vlpt:-''} #填写vless-reality端口，空为随机
 export port_vm_ws=${vmpt:-''} #填写vmess-ws端口，空为随机
 export port_hy2=${hypt:-''} #填写hy2端口，空为随机
