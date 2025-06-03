@@ -260,6 +260,18 @@ fi
 ipchange(){
 v4=$(curl -s4m5 icanhazip.com -k)
 v6=$(curl -s6m5 icanhazip.com -k)
+if [[ -z "$v4" ]]; then
+vps_ipv4='无IPV4'      
+vps_ipv6="$v6"
+elif [[ -n "$v4" && -n "$v6" ]]; then
+vps_ipv4="$v4"    
+vps_ipv6="$v6"
+else
+vps_ipv4="$v4"    
+vps_ipv6='无IPV6'
+fi
+echo "本地IPV4地址：$vps_ipv4"
+echo "本地IPV6地址：$vps_ipv6"
 if [ "$ipsw" == "4" ]; then
 if [ -z "$v4" ]; then
 ipbest
@@ -380,20 +392,6 @@ sed -i '/agsb\/cloudflared/d' /tmp/crontab.tmp
 crontab /tmp/crontab.tmp 2>/dev/null
 rm /tmp/crontab.tmp
 rm -rf $HOME/agsb $HOME/bin/agsb
-
-kill -15 $(cat /etc/s-box-ag/sbargopid.log 2>/dev/null) >/dev/null 2>&1
-kill -15 $(cat /etc/s-box-ag/sbpid.log 2>/dev/null) >/dev/null 2>&1
-kill -15 $(cat nixag/sbargopid.log 2>/dev/null) >/dev/null 2>&1
-kill -15 $(cat nixag/sbpid.log 2>/dev/null) >/dev/null 2>&1
-crontab -l > /tmp/crontab.tmp 2>/dev/null
-sed -i '/sbargopid/d' /tmp/crontab.tmp
-sed -i '/sbpid/d' /tmp/crontab.tmp
-crontab /tmp/crontab.tmp 2>/dev/null
-rm /tmp/crontab.tmp
-rm -rf /etc/s-box-ag /usr/bin/agsb
-sed -i '/yonggekkk/d' ~/.bashrc 
-source ~/.bashrc
-rm -rf nixag
 echo "卸载完成"
 exit
 elif [[ "$1" == "list" ]]; then
