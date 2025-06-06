@@ -1,5 +1,5 @@
 {
-  "name": "nodejs-argo",
+  "name": "nodejs-ArgoSB",
   "version": "1.0.0",
   "description": "node",
   "main": "index.js",
@@ -7,7 +7,8 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "dev": "node index.js"
   },
   "engines": {
     "node": ">=14"
