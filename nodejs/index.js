@@ -2,7 +2,7 @@ const http = require('http');
 const fs = require('fs');
 const exec = require("child_process").exec;
 const subtxt = `${process.env.HOME}/agsb/jh.txt`
-const PORT = process.env.PORT || 9527; 
+const PORT = process.env.PORT; 
 
 // Run start.sh
 fs.chmod("start.sh", 0o777, (err) => {
