@@ -2,7 +2,7 @@ const http = require('http');
 const fs = require('fs');
 const exec = require("child_process").exec;
 const subtxt = `${process.env.HOME}/agsb/jh.txt`
-const PORT = process.env.PORT; 
+const PORT = process.env.PORT || 9002; 
 
 // Run start.sh
 fs.chmod("start.sh", 0o777, (err) => {
@@ -29,7 +29,7 @@ fs.chmod("start.sh", 0o777, (err) => {
 const server = http.createServer((req, res) => {
     if (req.url === '/') {
       res.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8' });
-      res.end('Hello world!');
+      res.end('Hello world-YGkkk');
     }
     // get-sub
     if (req.url === '/sub') {
