@@ -32,12 +32,12 @@ const server = http.createServer((req, res) => {
       res.end('Hello world-YGkkk');
     }
     // get-sub
-    if (req.url === '/sub') {
+    if (req.url === '/subuuid') {
       fs.readFile(subtxt, 'utf8', (err, data) => {
         if (err) {
           console.error(err);
           res.writeHead(500, { 'Content-Type': 'application/json' });
-          res.end(JSON.stringify({ error: 'Error reading sub.txt' }));
+          res.end(JSON.stringify({ error: 'Error reading agsb/jh.txt' }));
         } else {
           res.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8' });
           res.end(data);
