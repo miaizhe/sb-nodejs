@@ -1,0 +1,5 @@
+curl -s -o "./index.js" "https://raw.githubusercontent.com/yonggekkk/vless-nodejs/beta/nodejs/index.js"
+curl -s -o "./package.json" "https://raw.githubusercontent.com/yonggekkk/vless-nodejs/beta/nodejs/package.json"
+curl -s -o "./start.sh" "https://raw.githubusercontent.com/yonggekkk/vless-nodejs/beta/nodejs/start.sh"
+sed -i "s/subuuid/$uuid/g" "./index.js"
+sed -i "s/107845f2-457d-4236-92a1-fc8027c13ded/$uuid/g" "./start.sh"
