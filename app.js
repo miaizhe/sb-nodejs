@@ -1,6 +1,5 @@
 const os = require('os');
 const http = require('http');
-const { Buffer } = require('buffer');
 const fs = require('fs');
 const path = require('path');
 const net = require('net');
@@ -13,20 +12,15 @@ function ensureModule(name) {
         execSync(`npm install ${name}`, { stdio: 'inherit' });
     }
 }
-ensureModule('axios');
 ensureModule('ws');
-const axios = require('axios');
 const { WebSocket, createWebSocketStream } = require('ws');
-const NEZHA_SERVER = process.env.NEZHA_SERVER || '';
-const NEZHA_PORT = process.env.NEZHA_PORT || '';
-const NEZHA_KEY = process.env.NEZHA_KEY || '';
 const NAME = process.env.NAME || os.hostname();
 console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 console.log("甬哥Github项目  ：github.com/yonggekkk");
 console.log("甬哥Blogger博客 ：ygkkk.blogspot.com");
 console.log("甬哥YouTube频道 ：www.youtube.com/@ygkkk");
 console.log("Nodejs真一键无交互Vless代理脚本");
-console.log("当前版本：25.5.20 测试beta3版");
+console.log("当前版本：25.6.9");
 console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 async function getVariableValue(variableName, defaultValue) {
     const envValue = process.env[variableName];
@@ -117,104 +111,6 @@ vless://${UUID}@[2400:cb00:2049::]:443?encryption=none&security=tls&sni=${DOMAIN
             }).on('error', () => { });
         }).on('error', () => { });
     });
-
-    downloadFiles();
-}
-
-function getSystemArchitecture() {
-    const arch = os.arch();
-    if (arch === 'arm' || arch === 'arm64') {
-        return 'arm';
-    } else {
-        return 'amd';
-    }
-}
-
-function downloadFile(fileName, fileUrl, callback) {
-    const filePath = path.join("./", fileName);
-    const writer = fs.createWriteStream(filePath);
-    axios({
-        method: 'get',
-        url: fileUrl,
-        responseType: 'stream',
-    })
-        .then(response => {
-            response.data.pipe(writer);
-            writer.on('finish', function () {
-                writer.close();
-                callback(null, fileName);
-            });
-        })
-        .catch(error => {
-            callback(`Download ${fileName} failed: ${error.message}`);
-        });
-}
-
-function downloadFiles() {
-    const architecture = getSystemArchitecture();
-    const filesToDownload = getFilesForArchitecture(architecture);
-
-    if (filesToDownload.length === 0) {
-        console.log(`Can't find a file for the current architecture`);
-        return;
-    }
-
-    let downloadedCount = 0;
-
-    filesToDownload.forEach(fileInfo => {
-        downloadFile(fileInfo.fileName, fileInfo.fileUrl, (err, fileName) => {
-            if (err) {
-                console.log(`Download ${fileName} failed`);
-            } else {
-                console.log(`Download ${fileName} successfully`);
-
-                downloadedCount++;
-
-                if (downloadedCount === filesToDownload.length) {
-                    setTimeout(() => {
-                        authorizeFiles();
-                    }, 3000);
-                }
-            }
-        });
-    });
-}
-
-function getFilesForArchitecture(architecture) {
-    if (architecture === 'arm') {
-        return [
-            { fileName: "npm", fileUrl: "https://github.com/yonggekkk/vless-nodejs/releases/download/vlnodejs/js_arm" },
-        ];
-    } else if (architecture === 'amd') {
-        return [
-            { fileName: "npm", fileUrl: "https://github.com/yonggekkk/vless-nodejs/releases/download/vlnodejs/js_amd" },
-        ];
-    }
-    return [];
-}
-
-function authorizeFiles() {
-    const filePath = './npm';
-    const newPermissions = 0o775;
-    fs.chmod(filePath, newPermissions, (err) => {
-        if (err) {
-            console.error(`Empowerment failed:${err}`);
-        } else {
-            console.log(`Empowerment success:${newPermissions.toString(8)} (${newPermissions.toString(10)})`);
-
-            if (NEZHA_SERVER && NEZHA_PORT && NEZHA_KEY) {
-                let NEZHA_TLS = (NEZHA_PORT === '443') ? '--tls' : '';
-                const command = `./npm -s ${NEZHA_SERVER}:${NEZHA_PORT} -p ${NEZHA_KEY} ${NEZHA_TLS} --skip-conn --disable-auto-update --skip-procs --report-delay 4 >/dev/null 2>&1 &`;
-                try {
-                    exec(command);
-                    console.log('npm is running');
-                } catch (error) {
-                    console.error(`npm running error: ${error}`);
-                }
-            } else {
-                console.log('skip running');
-            }
-        }
-    });
+console.log(`vless-ws-tls节点分享: vless://${UUID}@${DOMAIN}:443?encryption=none&security=tls&sni=${DOMAIN}&fp=chrome&type=ws&host=${DOMAIN}&path=%2F#Vl-ws-tls-${NAME}`);
 }
 main();
