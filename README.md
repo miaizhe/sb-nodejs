@@ -1,5 +1,6 @@
 ## 一、Webhostmost、freecloud.ltd在Node.js环境搭建vless-ws-tls脚本
 
+如果Webhostmost有SSH，请输入一键脚本
 ```
 wget -N https://raw.githubusercontent.com/yonggekkk/sb-nodejs/main/whm.sh && UUID=你的uuid PORT=服务器可使用的端口 DOMAIN=已解析在CF的域名 bash whm.sh
 ```
