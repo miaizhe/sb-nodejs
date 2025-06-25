@@ -17,8 +17,9 @@ sed -i "s/('UUID', '')/('UUID', '$uuid')/g" "/home/$username/domains/$domain/pub
 sed -i "s/('DOMAIN', '')/('DOMAIN', '$domain')/g" "/home/$username/domains/$domain/public_html/app.js"
 sed -i "s/('PORT', '')/('PORT', '$vl_port')/g" "/home/$username/domains/$domain/public_html/app.js"
 echo "https://$domain/$uuid" > "/home/$username/domains/keepsub.txt"
+serv=$(hostname -s)
 echo "---------------------------------------------"
 echo "安装结束"
-echo "浏览器打开https://${hostname -s}.webhostmost.com:2222/evo/user/plugins/nodejs_selector#/"
+echo "浏览器打开https://$serv.webhostmost.com:2222/evo/user/plugins/nodejs_selector#/"
 echo "设置相关Node.js参数即可"
 echo "最后，打开支持保活的节点分享链接：https://$domain/$uuid 已保存在文件管理器中的keepsub.txt文件中"  
