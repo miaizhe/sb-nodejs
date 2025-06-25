@@ -1,19 +1,16 @@
 ## 一、Webhostmost、freecloud.ltd在Node.js环境搭建vless-ws-tls脚本
 
-如果Webhostmost有SSH，请输入一键脚本
-```
-wget -N https://raw.githubusercontent.com/yonggekkk/sb-nodejs/main/whm.sh && UUID=你的uuid PORT=服务器可使用的端口 DOMAIN=已解析在CF的域名 bash whm.sh
-```
-
-原教程直接用app.js文件编辑变量可能存在不方便或者不安全的问题，建议在Node.js界面下添加或者修改变量
+如果Webhostmost的开发者工具（Development Tools）有Terminal，说明可以进入SSH，然后输入以下一键脚本
 
 UUID：你的uuid
 
-PORT：服务器可使用的端口
+PORT：服务器可使用的端口，建议留空随机生成
 
 DOMAIN：已解析在CF的域名
 
-![image](https://github.com/user-attachments/assets/6d317d44-605a-4c7d-af35-453fc4aeea51)
+```
+wget -N https://raw.githubusercontent.com/yonggekkk/sb-nodejs/main/whm.sh && UUID=你的uuid PORT=服务器可使用的端口 DOMAIN=已解析在CF的域名 bash whm.sh
+```
 
 建议使用外部节点保活方式，可使用workers_keep文件进行保活
 
