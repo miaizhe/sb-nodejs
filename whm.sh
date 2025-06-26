@@ -23,5 +23,5 @@ echo "安装结束"
 echo
 echo "ctrl+选中下面网址，右击复制"
 echo "https://$serv.webhostmost.com:2222/evo/user/plugins/nodejs_selector#/"
-echo "请另外打开浏览器窗口，粘贴以上网址，自动进入Nodejs界面设置参数设置即可"
+echo "请另外打开浏览器窗口，粘贴以上网址，可绕过限制进入Nodejs界面，设置相关参数即可"
 echo "最后，打开支持保活的节点分享链接：https://$domain/$uuid 已保存在文件管理器中的keepsub.txt文件中"  
