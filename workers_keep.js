@@ -1,6 +1,6 @@
 addEventListener('scheduled', event => event.waitUntil(handleScheduled()));
 // 每个保活网页之间用空格或者，或者,间隔开，网页前带https://
-const urlString = 'https://保活网页1 https://保活网页2 https://保活网页3 ………';
+const urlString = 'https://mm.ftyfty2021.dpdns.org,https://mm.ftyfty2021.dpdns.org/56d2c2c0-0de1-4c3b-bcc0-a1f7dc32dab7';
 const urls = urlString.split(/[\s,，]+/);
 const TIMEOUT = 5000;
 async function fetchWithTimeout(url) {
